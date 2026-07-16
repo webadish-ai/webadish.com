@@ -9,6 +9,8 @@
 - Hacked site recovery: https://www.webadish.com/hacked-site-recovery
 - WordPress security retainers: https://www.webadish.com/retainer
 - WordPress web design: https://www.webadish.com/web-design
+- India-focused WordPress services: https://www.webadish.com/india
+- Free WordPress security score: https://www.webadish.com/security-score
 
 ## Important Pages
 
@@ -17,6 +19,17 @@
 - Case studies: https://www.webadish.com/case-studies
 - Contact: https://www.webadish.com/contact
 - Blog: https://www.webadish.com/blog
+- Verofax recovery case study: https://www.webadish.com/case-studies/verofax
+- Shivam Autozone case study: https://www.webadish.com/case-studies/shivamautozone
+- Crystal Group case study: https://www.webadish.com/case-studies/crystalgroup
+
+## Current Buyer Guides
+
+- DPDP Act checklist for Indian WordPress sites: https://www.webadish.com/blog/dpdp-act-2023-checklist-wordpress-india
+- Choosing a WordPress maintenance plan in India: https://www.webadish.com/blog/wordpress-maintenance-plan-india
+- The real cost of nulled WordPress plugins: https://www.webadish.com/blog/wordpress-nulled-plugins-risk
+- WooCommerce payment gateway security: https://www.webadish.com/blog/woocommerce-payment-gateway-security
+- WordPress malware removal process: https://www.webadish.com/blog/wordpress-malware-removal
 
 ## Business Summary
 
@@ -34,3 +47,4 @@ WebAdish works with businesses that rely on WordPress websites for leads, sales,
 - Website: https://www.webadish.com/
 - Email: hello@webadish.com
 - Phone: +91 999 875 7045
+- WhatsApp: https://wa.me/919998757045

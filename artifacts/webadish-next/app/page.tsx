@@ -6,28 +6,31 @@ import OptimizedImage from '@/components/OptimizedImage';
 
 const featuredPosts = [
   {
-    tag: 'Security',
-    tagColor: 'text-primary',
-    title: 'Protect Your Digital Assets: Why Cybersecurity Is Critical for Modern Businesses',
-    date: 'March 16, 2026',
-    read: '5 min',
-    img: '/blog/legacy-security-awareness-banner.svg',
-  },
-  {
-    tag: 'Security',
-    tagColor: 'text-primary',
-    title: 'How Hackers Break Into Websites – And How to Stop Them',
-    date: 'March 2, 2026',
-    read: '7 min',
-    img: '/blog/legacy-security-awareness-banner.svg',
+    tag: 'Guides',
+    tagColor: 'text-accent',
+    title: 'DPDP Act 2023 Checklist: 7 Changes Every Indian WordPress Site Must Make by August 2026',
+    date: 'June 14, 2026',
+    read: '9 min',
+    img: '/blog/dpdp-act-wordpress-guide-banner.svg',
+    href: '/blog/dpdp-act-2023-checklist-wordpress-india',
   },
   {
     tag: 'Buyer Intent',
     tagColor: 'text-foreground',
-    title: 'Before You Hire a WordPress Security Team: 7 Questions That Reveal the Right Fit',
-    date: 'March 21, 2026',
+    title: 'How to Choose a WordPress Maintenance Plan: A Framework for Indian Businesses',
+    date: 'June 16, 2026',
+    read: '8 min',
+    img: '/blog/hosting-vs-managed-security-banner.svg',
+    href: '/blog/wordpress-maintenance-plan-india',
+  },
+  {
+    tag: 'Security',
+    tagColor: 'text-primary',
+    title: 'The Real Cost of Running Nulled WordPress Plugins',
+    date: 'June 9, 2026',
     read: '7 min',
-    img: '/blog/hire-wordpress-security-team-banner.svg',
+    img: '/blog/plugin-audit-banner.svg',
+    href: '/blog/wordpress-nulled-plugins-risk',
   },
 ];
 
@@ -246,7 +249,11 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {featuredPosts.map((post) => (
-              <article key={post.title} className="group overflow-hidden rounded-2xl border border-border/50 bg-white shadow-sm hover:shadow-lg transition-all">
+              <Link
+                key={post.title}
+                href={post.href}
+                className="group overflow-hidden rounded-2xl border border-border/50 bg-white shadow-sm hover:shadow-lg transition-all"
+              >
                 <div className="aspect-[3/2] overflow-hidden bg-muted">
                   <OptimizedImage src={post.img} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" width={576} height={380} />
                 </div>
@@ -254,10 +261,10 @@ export default function HomePage() {
                   <div className={`inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold mb-4 bg-white border border-border/50 ${post.tagColor}`}>
                     {post.tag}
                   </div>
-                  <h3 className="text-xl font-bold text-foreground mb-3">{post.title}</h3>
+                  <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors">{post.title}</h3>
                   <p className="text-sm text-muted-foreground">{post.date} · {post.read}</p>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         </div>

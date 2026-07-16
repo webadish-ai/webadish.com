@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
+import { blogSlugs } from './blog/blogSlugs';
 
 const baseUrl = 'https://www.webadish.com';
 const lastModified = new Date('2026-06-22');
@@ -17,6 +18,8 @@ const routes = [
   { path: '/case-studies/crystalgroup', priority: 0.7 },
   { path: '/security-score', priority: 0.75 },
   { path: '/india', priority: 0.7 },
+  { path: '/india/dpdp-compliance-wordpress', priority: 0.75 },
+  { path: '/india/cert-in-incident-readiness', priority: 0.75 },
   { path: '/blog', priority: 0.65 },
   { path: '/10-website-hacking-methods-that-put-your-site-at-risk-in-2025', priority: 0.6 },
   { path: '/agency-partners', priority: 0.6 },
@@ -26,8 +29,13 @@ const routes = [
   { path: '/refund-policy', priority: 0.2 },
 ];
 
+const blogRoutes = blogSlugs.map((slug) => ({
+  path: `/blog/${slug}`,
+  priority: 0.6,
+}));
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  return routes.map(({ path, priority }) => ({
+  return [...routes, ...blogRoutes].map(({ path, priority }) => ({
     url: `${baseUrl}${path}`,
     lastModified,
     changeFrequency: path === '/' ? 'weekly' : 'monthly',
