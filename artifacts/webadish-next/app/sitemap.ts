@@ -21,7 +21,6 @@ const routes = [
   { path: '/india/dpdp-compliance-wordpress', priority: 0.75 },
   { path: '/india/cert-in-incident-readiness', priority: 0.75 },
   { path: '/blog', priority: 0.65 },
-  { path: '/10-website-hacking-methods-that-put-your-site-at-risk-in-2025', priority: 0.6 },
   { path: '/agency-partners', priority: 0.6 },
   { path: '/web-design', priority: 0.5 },
   { path: '/privacy-policy', priority: 0.2 },

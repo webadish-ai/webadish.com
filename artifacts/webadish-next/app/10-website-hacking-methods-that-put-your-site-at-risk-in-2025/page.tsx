@@ -1,7 +1,5 @@
-'use client';
-
-import BlogPost from '../../../webadish/src/pages/BlogPost';
+import { permanentRedirect } from 'next/navigation';
 
 export default function LegacyBlogPostAliasPage() {
-  return <BlogPost />;
+  permanentRedirect('/blog/10-website-hacking-methods-that-put-your-site-at-risk-in-2025');
 }
