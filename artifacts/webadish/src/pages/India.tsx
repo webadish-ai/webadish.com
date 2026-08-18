@@ -52,10 +52,17 @@ export default function India() {
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             WordPress Security & Maintenance Pricing for <span className="text-accent">Indian Businesses</span>
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-6">
             You do not need to choose from our global USD plans. This page is for Indian businesses that want local INR
             pricing, fast WhatsApp response, and a clear quote before work begins.
           </p>
+
+          <div className="mb-10 inline-flex items-center gap-2 text-sm bg-accent/10 text-accent font-semibold px-4 py-2 rounded-xl border border-accent/20">
+            <span>🚨 Active Hack / Malware Emergency?</span>
+            <a href="https://www.wordpressrecovery.in" target="_blank" rel="noopener noreferrer" className="underline font-bold hover:text-white flex items-center gap-1">
+              Visit WordPressRecovery.in <ArrowRight size={14} />
+            </a>
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto mb-10">
             <div className="rounded-2xl border border-accent/20 bg-white/80 p-5 shadow-sm">
