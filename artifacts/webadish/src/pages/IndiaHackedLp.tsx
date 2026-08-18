@@ -58,6 +58,12 @@ export default function IndiaHackedLp() {
                 </Button>
               </a>
             </div>
+            <div className="mt-4 inline-flex items-center gap-2 text-sm text-muted-foreground bg-white/80 backdrop-blur-sm px-4 py-2 rounded-xl border border-gray-200 shadow-sm">
+              <span>Official India Emergency Desk:</span>
+              <a href="https://www.wordpressrecovery.in" target="_blank" rel="noopener noreferrer" className="font-bold text-primary hover:underline inline-flex items-center gap-1">
+                WordPressRecovery.in <ArrowRight size={14} />
+              </a>
+            </div>
           </div>
         </div>
       </section>
