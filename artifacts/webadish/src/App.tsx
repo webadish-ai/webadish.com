@@ -47,6 +47,7 @@ const CaseStudies = lazy(() => import("@/pages/CaseStudies"));
 const CaseStudyVerofax = lazy(() => import("@/pages/CaseStudyVerofax"));
 const CaseStudyShivamAutozone = lazy(() => import("@/pages/CaseStudyShivamAutozone"));
 const CaseStudyCrystalGroup = lazy(() => import("@/pages/CaseStudyCrystalGroup"));
+const CaseStudyAgencyPortfolio = lazy(() => import("@/pages/CaseStudyAgencyPortfolio"));
 import Contact from "@/pages/Contact";
 const About = lazy(() => import("@/pages/About"));
 const WebDesign = lazy(() => import("@/pages/WebDesign"));
@@ -83,6 +84,7 @@ function AppRoutes() {
         <Route path="/case-studies/verofax" component={CaseStudyVerofax} />
         <Route path="/case-studies/shivamautozone" component={CaseStudyShivamAutozone} />
         <Route path="/case-studies/crystalgroup" component={CaseStudyCrystalGroup} />
+        <Route path="/case-studies/agency-portfolio-recovery" component={CaseStudyAgencyPortfolio} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
         <Route path="/web-design" component={WebDesign} />

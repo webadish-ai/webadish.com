@@ -53,6 +53,7 @@ export const PRERENDER_ROUTES = [
   "/case-studies/verofax",
   "/case-studies/shivamautozone",
   "/case-studies/crystalgroup",
+  "/case-studies/agency-portfolio-recovery",
   "/contact",
   "/web-design",
   "/privacy-policy",
@@ -624,7 +625,7 @@ const pageSeo: Record<string, SeoData> = {
   "/case-studies": {
     title: "WordPress Security Case Studies | Verofax, Shivam Autozone, Crystal Group",
     description:
-      "See how WebAdish supported Verofax, Shivam Autozone, and Crystal Group with WordPress incident response, security hardening, performance improvement, and ongoing support.",
+      "See how WebAdish supported Verofax, Shivam Autozone, Crystal Group, and a 263-site agency portfolio with WordPress incident response, security hardening, performance improvement, and ongoing support.",
     path: "/case-studies",
     keywords: [
       "wordpress case studies",
@@ -646,7 +647,37 @@ const pageSeo: Record<string, SeoData> = {
         { name: "Verofax", path: "/case-studies/verofax" },
         { name: "Shivam Autozone", path: "/case-studies/shivamautozone" },
         { name: "Crystal Group", path: "/case-studies/crystalgroup" },
+        { name: "Agency Portfolio Recovery", path: "/case-studies/agency-portfolio-recovery" },
       ]),
+    ],
+  },
+  "/case-studies/agency-portfolio-recovery": {
+    title: "263 WordPress Sites Recovered | Agency Portfolio Case Study",
+    description:
+      "How WebAdish recovered 263 WordPress sites for a real estate marketing agency — including two previously-undocumented database-trigger backdoors that file-based malware scanners can't detect.",
+    path: "/case-studies/agency-portfolio-recovery",
+    keywords: [
+      "multiple wordpress sites hacked",
+      "wordpress agency portfolio recovery",
+      "wordpress database backdoor",
+      "wordpress reinfection after cleanup",
+    ],
+    breadcrumbs: [
+      { name: "Home", path: "/" },
+      { name: "Case Studies", path: "/case-studies" },
+      { name: "Agency Portfolio Recovery", path: "/case-studies/agency-portfolio-recovery" },
+    ],
+    schema: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline:
+          "Recovering 168 WordPress Sites From a Multi-Layer Malware Campaign — Including a Database Backdoor Automated Scanners Can't See",
+        description:
+          "A real estate marketing agency's 263-site WordPress portfolio was reinfected after a first cleanup attempt. WebAdish found layered malware, a vulnerable reinfection vector, and two previously-undocumented database-trigger backdoors.",
+        author: { "@type": "Organization", name: "WebAdish" },
+        publisher: { "@type": "Organization", name: "WebAdish", url: SITE_URL },
+      },
     ],
   },
   "/case-studies/verofax": {

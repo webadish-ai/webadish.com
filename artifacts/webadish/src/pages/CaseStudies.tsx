@@ -29,10 +29,13 @@ export default function CaseStudies() {
             How WebAdish handles critical WordPress security incidents — from containment to long-term protection.
           </p>
           <p className="mt-4 text-sm text-muted-foreground">
-            Trust built through real client work for verofax.com, shivamautozone.com, and crystalgroup.in.
+            Trust built through real client work for verofax.com, shivamautozone.com, crystalgroup.in, and a 263-site agency portfolio.
           </p>
-          <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3">
+          <div className="mt-8 flex flex-col sm:flex-row flex-wrap justify-center gap-3">
             <Button asChild variant="accent">
+              <Link href="/case-studies/agency-portfolio-recovery">View Agency Portfolio Recovery</Link>
+            </Button>
+            <Button asChild variant="outline-primary" className="bg-white">
               <Link href="/case-studies/verofax">View Verofax Case Study</Link>
             </Button>
             <Button asChild variant="outline-primary" className="bg-white">
@@ -44,6 +47,61 @@ export default function CaseStudies() {
           </div>
         </div>
       </section>
+
+      {/* CASE 0 — AGENCY PORTFOLIO RECOVERY */}
+      <article className="py-20 bg-gray-50 border-b border-border/50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-12">
+            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-4">
+              <Shield size={12} /> Incident Response — Portfolio Scale
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-4">
+              263 WordPress Sites Recovered From a Single Hosting Account
+            </h2>
+            <p className="text-muted-foreground text-lg">Client: Real estate marketing agency — 263-site WordPress portfolio across three shared hosting servers</p>
+          </div>
+
+          <div className="bg-white rounded-2xl border border-border/50 p-8 mb-12">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-6">Case Snapshot</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {[
+                { label: "Client Type", value: "Real Estate Marketing Agency" },
+                { label: "Issue", value: "Layered malware, self-healing reinfection, hidden database backdoors" },
+                { label: "Scope", value: "263 sites, 3 shared hosting servers, 1 account" },
+                { label: "Engagement Level", value: "Full Portfolio Incident Response + Hardening" },
+              ].map((row) => (
+                <div key={row.label} className="flex flex-col gap-1">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{row.label}</span>
+                  <span className="text-sm font-medium text-foreground">{row.value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-red-50 border border-red-200 rounded-xl p-5 mb-10">
+            <p className="text-sm font-semibold text-red-800">
+              The site had already been "cleaned" once by another provider and kept reinfecting. The reason: a MySQL database trigger — a backdoor category standard file-based malware scanners never check for.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+            {[
+              { value: "263", label: "Sites Recovered & Audited" },
+              { value: "0", label: "Data Loss" },
+              { value: "2", label: "Unknown Backdoors Closed" },
+            ].map((m) => (
+              <div key={m.label} className="bg-green-50 border border-green-200 rounded-2xl p-6 text-center">
+                <div className="text-3xl font-bold text-green-700 mb-1">{m.value}</div>
+                <div className="text-xs font-medium uppercase tracking-wide text-green-600">{m.label}</div>
+              </div>
+            ))}
+          </div>
+
+          <Button asChild variant="accent">
+            <Link href="/case-studies/agency-portfolio-recovery">Read the Full Case Study <ArrowRight size={16} className="ml-2" /></Link>
+          </Button>
+        </div>
+      </article>
 
       {/* CASE 1 — VEROFAX */}
       <article className="py-20 bg-white border-b border-border/50">
