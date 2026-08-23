@@ -31,19 +31,30 @@ export default function CaseStudies() {
           <p className="mt-4 text-sm text-muted-foreground">
             Trust built through real client work for verofax.com, shivamautozone.com, crystalgroup.in, and a 263-site agency portfolio.
           </p>
-          <div className="mt-8 flex flex-col sm:flex-row flex-wrap justify-center gap-3">
-            <Button asChild variant="accent">
-              <Link href="/case-studies/agency-portfolio-recovery">View Agency Portfolio Recovery</Link>
-            </Button>
-            <Button asChild variant="outline-primary" className="bg-white">
-              <Link href="/case-studies/verofax">View Verofax Case Study</Link>
-            </Button>
-            <Button asChild variant="outline-primary" className="bg-white">
-              <Link href="/case-studies/shivamautozone">View Shivam Autozone</Link>
-            </Button>
-            <Button asChild variant="outline-primary" className="bg-white">
-              <Link href="/case-studies/crystalgroup">View Crystal Group</Link>
-            </Button>
+        </div>
+      </section>
+
+      {/* SELECTED RECOVERIES — stat-led teasers */}
+      <section className="py-16 px-4 bg-white border-b border-border/50">
+        <div className="max-w-6xl mx-auto">
+          <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-3 text-center">Selected Recoveries</p>
+          <h2 className="text-2xl md:text-3xl font-bold mb-12 text-center">Proof is better than promises.</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {[
+              { stat: "263", label: "Sites Recovered", desc: "One agency, three servers, two hidden database backdoors found and closed.", href: "/case-studies/agency-portfolio-recovery" },
+              { stat: "0", label: "Reinfections After 30 Days", desc: "Compromised eCommerce site cleaned and hardened in under 48 hours.", href: "/case-studies/verofax" },
+              { stat: "60%", label: "Faster Load Time", desc: "Full WordPress rebuild with modern security architecture for a growing dealership.", href: "/case-studies/shivamautozone" },
+              { stat: "B2B", label: "Enterprise Trust Rebuilt", desc: "Custom WordPress build that turned procurement conversations into closed deals.", href: "/case-studies/crystalgroup" },
+            ].map((c) => (
+              <Link key={c.href} href={c.href} className="group block border border-border/50 rounded-2xl p-6 hover:border-accent hover:shadow-lg transition-all duration-200 bg-gray-50/50">
+                <div className="text-4xl font-extrabold text-foreground mb-1 group-hover:text-accent transition-colors">{c.stat}</div>
+                <div className="text-xs font-bold uppercase tracking-wide text-accent mb-4">{c.label}</div>
+                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{c.desc}</p>
+                <span className="text-sm font-semibold text-primary inline-flex items-center gap-1">
+                  Read recovery story <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
