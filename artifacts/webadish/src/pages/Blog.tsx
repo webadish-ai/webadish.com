@@ -7,6 +7,30 @@ import { useState } from "react";
 
 const posts = [
   {
+    tag: "Recovery",
+    tagColor: "text-red-600",
+    tagBg: "bg-red-100",
+    title: "Why WordPress Malware Keeps Coming Back After Cleanup",
+    excerpt:
+      "If your site was 'cleaned' and got reinfected days or weeks later, the malware wasn't the real problem — the entry point was never closed. Here's what actually causes reinfection, drawn from a real 263-site recovery.",
+    date: "August 23, 2026",
+    read: "7 min",
+    img: "/blog/incident-recovery-banner.svg",
+    href: "/blog/wordpress-malware-keeps-coming-back",
+  },
+  {
+    tag: "Malware Analysis",
+    tagColor: "text-accent",
+    tagBg: "bg-accent/10",
+    title: "How to Identify and Remove Hidden WordPress Backdoors",
+    excerpt:
+      "Most backdoors are files. The ones that survive a cleanup are the ones nobody thinks to check for — including a MySQL database trigger that creates an admin account the moment someone posts a comment.",
+    date: "August 23, 2026",
+    read: "8 min",
+    img: "/blog/incident-recovery-banner.svg",
+    href: "/blog/hidden-wordpress-backdoors-database-triggers",
+  },
+  {
     tag: "Guides",
     tagColor: "text-accent",
     tagBg: "bg-accent/10",

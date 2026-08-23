@@ -8,6 +8,94 @@ const posts: Record<string, {
   tag: string; tagColor: string; title: string; date: string; read: string;
   img: string; imgPosition?: string; content: React.ReactNode;
 }> = {
+  "wordpress-malware-keeps-coming-back": {
+    tag: "Recovery", tagColor: "text-red-600",
+    title: "Why WordPress Malware Keeps Coming Back After Cleanup",
+    date: "August 23, 2026", read: "7 min",
+    img: "/blog/incident-recovery-banner.svg",
+    content: (
+      <div className="space-y-6 text-muted-foreground leading-relaxed">
+        <p className="text-xl font-medium text-foreground">Cleaning the visible malware off a WordPress site is not the same as securing it. If the infection comes back days or weeks after a "cleanup," the malware was never the actual problem — the way the attacker got in was never closed.</p>
+        <div className="bg-primary/5 border border-primary/20 rounded-2xl p-6 my-8">
+          <p className="font-bold text-foreground text-lg mb-2">Reinfected after a previous cleanup?</p>
+          <p className="text-sm mb-4">We recently recovered 263 WordPress sites for an agency in exactly this situation — cleaned once elsewhere, reinfected within days. <Link href="/case-studies/agency-portfolio-recovery" className="underline font-semibold">Read the full case study</Link>, or talk to us about your own site.</p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link href="/hacked-site-recovery" className="inline-flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary/90 transition-colors">Get Emergency Help</Link>
+            <Link href="/contact" className="inline-flex items-center gap-2 border border-primary text-primary px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary/5 transition-colors">Contact Us</Link>
+          </div>
+        </div>
+        <h2 className="text-2xl font-bold text-foreground mt-8">The Symptom Everyone Recognizes</h2>
+        <p>Someone cleans your site — a plugin, your host, a low-cost freelancer. For a few days it looks fine. Then the spam redirects come back, or Google flags you again, or a new admin account you didn't create shows up. This isn't bad luck. It's the predictable result of removing symptoms without finding the cause.</p>
+        <h2 className="text-2xl font-bold text-foreground mt-8">Why "Cleaned" Doesn't Mean "Secure"</h2>
+        <p>A surface-level cleanup typically only does one thing: deletes the malware files a scanner can see. It usually misses:</p>
+        <ul className="list-disc list-inside space-y-2 pl-4">
+          <li><strong>The original entry point</strong> — often a vulnerable plugin with a known, unpatched upload vulnerability, which the attacker can simply use again.</li>
+          <li><strong>Self-healing droppers</strong> — a small piece of injected code, often in a theme's <code>functions.php</code>, that silently re-creates the malicious plugin the moment it's deleted.</li>
+          <li><strong>Rogue administrator accounts</strong> — with randomized names, sitting quietly until they're needed again.</li>
+          <li><strong>Database-level persistence</strong> — logic planted directly in your database that survives a full file-system wipe entirely (more on this below).</li>
+        </ul>
+        <h2 className="text-2xl font-bold text-foreground mt-8">A Real Example: 263 Sites, One Reinfection Vector</h2>
+        <p>In a recent engagement, a real estate marketing agency's 263-site WordPress portfolio had already been through one round of cleanup with a previous provider. Sites kept throwing errors and reinfecting anyway. The actual cause: a vulnerable file-manager plugin with a known history of unauthenticated upload vulnerabilities, which the attacker was actively using to re-upload their payload every time it was removed. Until that specific plugin was identified and removed account-wide, no amount of file deletion would have held.</p>
+        <h2 className="text-2xl font-bold text-foreground mt-8">The Backdoor Category Most Scanners Miss Entirely</h2>
+        <p>The same engagement turned up something more concerning: backdoors planted not in any file, but inside the MySQL database itself, as triggers that silently recreated administrator access. WordPress never uses database triggers on its own — so their presence is always a red flag — but it's a category of compromise that standard file-based malware scanners simply don't check for. We cover this in detail in <Link href="/blog/hidden-wordpress-backdoors-database-triggers" className="text-accent hover:underline font-medium">our companion article on hidden WordPress backdoors →</Link></p>
+        <h2 className="text-2xl font-bold text-foreground mt-8">How to Actually Break the Reinfection Cycle</h2>
+        <ol className="list-decimal list-inside space-y-3 pl-4">
+          <li><strong>Full database audit</strong> — check for hidden triggers, stored procedures, and scheduled events, not just infected files.</li>
+          <li><strong>Identify the real entry point</strong> — not just what's currently on the site, but how the attacker got in and whether that vulnerability still exists.</li>
+          <li><strong>Rotate every credential</strong> — WordPress admin, hosting panel, FTP/SFTP, database, and switch to key-based authentication where possible.</li>
+          <li><strong>Harden after cleanup</strong> — close the specific vulnerability used, not just generic hardening advice.</li>
+          <li><strong>Monitor for a real window</strong> — 30 days minimum, since some persistence mechanisms are dormant until triggered.</li>
+        </ol>
+        <h2 className="text-2xl font-bold text-foreground mt-8">Frequently Asked Questions</h2>
+        <div className="space-y-5">
+          <div><p className="font-semibold text-foreground">My host says they already cleaned my site — why did it get hacked again?</p><p>Hosting-level cleanups typically remove obvious malicious files from the filesystem only. They rarely audit the database for hidden triggers or admin accounts, and they don't usually identify or close the original vulnerability — so the same entry point remains open.</p></div>
+          <div><p className="font-semibold text-foreground">How long should I monitor a site after cleanup before trusting it's clean?</p><p>At least 30 days. Some persistence mechanisms, like comment-activated database triggers, sit dormant until a specific condition is met, so a few clean days is not proof of a complete recovery.</p></div>
+          <div><p className="font-semibold text-foreground">Can a plugin-based scanner catch a database trigger?</p><p>No. WordPress security plugins scan files and, at best, known malicious database content patterns — they do not check for triggers, stored procedures, or scheduled events, since WordPress itself never creates these on its own.</p></div>
+          <div><p className="font-semibold text-foreground">What's the single biggest mistake in DIY reinfection cleanup?</p><p>Treating the symptom (visible malware) as the problem, rather than treating it as evidence of an entry point that's still open. Removing files without closing the actual vulnerability guarantees reinfection.</p></div>
+        </div>
+        <p>If your site — or your agency's portfolio — has been cleaned before and keeps coming back, that's worth a proper investigation. <Link href="/hacked-site-recovery" className="text-accent hover:underline font-medium">Talk to our recovery team →</Link></p>
+      </div>
+    ),
+  },
+  "hidden-wordpress-backdoors-database-triggers": {
+    tag: "Malware Analysis", tagColor: "text-accent",
+    title: "How to Identify and Remove Hidden WordPress Backdoors",
+    date: "August 23, 2026", read: "8 min",
+    img: "/blog/incident-recovery-banner.svg",
+    content: (
+      <div className="space-y-6 text-muted-foreground leading-relaxed">
+        <p className="text-xl font-medium text-foreground">Most WordPress backdoors are files — a webshell, a disguised plugin, an injected line in <code>functions.php</code>. Those are the ones every scanner looks for. The backdoors that survive a cleanup are the ones nobody thinks to check for.</p>
+        <h2 className="text-2xl font-bold text-foreground mt-8">The Usual Suspects: File-Based Backdoors</h2>
+        <p>Before the unusual ones, the common categories worth knowing:</p>
+        <ul className="list-disc list-inside space-y-2 pl-4">
+          <li><strong>Web shells</strong> — full file-manager tools disguised as plugin files, giving an attacker direct read/write access through a browser.</li>
+          <li><strong>Hidden must-use plugins</strong> — placed in <code>wp-content/mu-plugins/</code>, which loads automatically and isn't visible in the normal plugins list.</li>
+          <li><strong>Theme-level droppers</strong> — code injected into a theme's <code>functions.php</code> that silently re-creates a deleted backdoor plugin.</li>
+          <li><strong>Cloaker pages</strong> — files named to look like real site pages (<code>about-us.php</code>, <code>contact-us.php</code>) that serve spam content only to search engine crawlers.</li>
+        </ul>
+        <h2 className="text-2xl font-bold text-foreground mt-8">The Backdoor Category File Scanners Don't Check</h2>
+        <p>WordPress never uses database triggers, stored procedures, or scheduled events on its own. That means any presence of one is automatically suspicious — but it's a category of compromise that standard file-based malware scanners simply aren't built to look for, because they scan the filesystem, not the database schema.</p>
+        <div className="bg-red-50 border border-red-200 rounded-2xl p-6 my-6">
+          <p className="font-bold text-red-700 text-lg mb-2">Real case: the admin-account trigger</p>
+          <p className="text-red-700 text-sm">During a recent 263-site recovery, one client site became completely inaccessible — even the hosting panel's one-click admin login failed, despite every conventional check coming back clean. The cause: a MySQL trigger that silently intercepted any attempt to create a new administrator account, allowing only the attacker's disguised account to exist. Once that account was removed, the trigger made it permanently impossible to create a replacement through any normal means. <Link href="/case-studies/agency-portfolio-recovery" className="underline font-semibold">Read the full case study →</Link></p>
+        </div>
+        <h2 className="text-2xl font-bold text-foreground mt-8">The Scarier Version: A Comment-Activated Backdoor</h2>
+        <p>The same investigation turned up a second trigger on several other sites — one that watched every public blog comment for a specific phrase. The moment that phrase appeared in a comment, something any anonymous visitor could submit, the trigger silently created a full administrator account with a password the attacker already controlled. No login, no file upload, no existing access required — just one public comment.</p>
+        <h2 className="text-2xl font-bold text-foreground mt-8">How to Check Your Own Site</h2>
+        <p>If you have direct database access, a developer can check for unexpected triggers, stored procedures, and scheduled events with standard MySQL queries — <code>SHOW TRIGGERS</code>, <code>SHOW PROCEDURE STATUS</code>, and <code>SHOW EVENTS</code> against your WordPress database. Anything present that you or your development team didn't explicitly create should be treated as a compromise until proven otherwise. This is genuinely not a DIY task past the initial check — safely removing a database-level backdoor without breaking legitimate site functionality requires understanding exactly what the trigger does and what it's connected to before touching it.</p>
+        <h2 className="text-2xl font-bold text-foreground mt-8">Why This Matters Even If You've Already Been "Cleaned"</h2>
+        <p>A site can pass every file-integrity check, have a fully verified WordPress core, and correct file permissions — and still be compromised at the database level. If your site (or your agency's portfolio) has ever been cleaned and you're still not 100% certain it's secure, a database-level check is the gap most cleanups skip entirely.</p>
+        <h2 className="text-2xl font-bold text-foreground mt-8">Frequently Asked Questions</h2>
+        <div className="space-y-5">
+          <div><p className="font-semibold text-foreground">Can Wordfence, Sucuri, or MalCare detect database triggers?</p><p>No. These tools are built to scan files and known malicious code patterns, not database schema objects like triggers, stored procedures, or scheduled events. A clean scan result from these tools does not rule out database-level persistence.</p></div>
+          <div><p className="font-semibold text-foreground">How would an attacker even plant a database trigger?</p><p>The same way they gain any other access — a compromised admin account, a vulnerable plugin with SQL execution capability, or direct database credentials obtained from a leaked config file. Once they have any way to run SQL, planting a trigger is straightforward.</p></div>
+          <div><p className="font-semibold text-foreground">Is it safe to just drop every trigger I find?</p><p>Only after confirming it isn't something your own team or a legitimate plugin created (some plugins do use triggers for caching or logging). Investigate what a trigger does before removing it — but any trigger you can't account for should be treated as hostile.</p></div>
+          <div><p className="font-semibold text-foreground">Does this affect WooCommerce checkout or customer data?</p><p>It can. A database-level backdoor with sufficient privileges could theoretically be extended to intercept order or customer data, which is exactly why a full database audit — not just a file scan — matters most for stores handling transactions.</p></div>
+        </div>
+        <p>If you manage a portfolio of WordPress sites and have never had the database itself audited — not just the files — that's worth doing before you assume you're secure. <Link href="/hacked-site-recovery" className="text-accent hover:underline font-medium">Talk to our team →</Link></p>
+      </div>
+    ),
+  },
   "dpdp-act-2023-checklist-wordpress-india": {
     tag: "Guides", tagColor: "text-accent",
     title: "DPDP Act 2023 Checklist: 7 Changes Every Indian WordPress Site Must Make by August 2026",

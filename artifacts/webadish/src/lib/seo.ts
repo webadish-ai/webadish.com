@@ -22,6 +22,8 @@ export const PRERENDER_ROUTES = [
   "/agency-partners",
   "/about",
   "/blog",
+  "/blog/wordpress-malware-keeps-coming-back",
+  "/blog/hidden-wordpress-backdoors-database-triggers",
   "/blog/wordpress-hacked-india-what-to-do",
   "/blog/dpdp-act-wordpress-website-guide",
   "/blog/wordpress-malware-removal",
@@ -76,12 +78,41 @@ type SeoData = {
 
 const organizationSchema = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": ["Organization", "ProfessionalService"],
   name: "WebAdish LLP",
   url: SITE_URL,
   logo: `${SITE_URL}/logo.webp`,
   email: "hello@webadish.com",
   telephone: "+91 9998757045",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Vadodara",
+    addressRegion: "Gujarat",
+    postalCode: "390001",
+    addressCountry: "IN",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 22.313541,
+    longitude: 73.1635065,
+  },
+  hasMap:
+    "https://www.google.com/maps/place/WebAdish+LLP/@22.313541,73.1635065,17z/data=!3m1!4b1!4m6!3m5!1s0x395fc916a5705195:0xf66db78eb0df563!8m2!3d22.313541!4d73.1635065!16s%2Fg%2F11xnvmfj70",
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5.0",
+    reviewCount: "10",
+    bestRating: "5",
+    worstRating: "1",
+  },
+  knowsAbout: [
+    "WordPress Security",
+    "Hacked Website Recovery",
+    "Malware Removal",
+    "WordPress Maintenance Contracts & SLA Retainers",
+    "AI Workflow Automation for SMBs",
+    "Custom ERP Development",
+  ],
   sameAs: [
     "https://www.linkedin.com/company/webadish",
     "https://www.facebook.com/webadish",
@@ -844,6 +875,82 @@ const articleSchema = (data: {
 });
 
 const blogPosts: Record<string, SeoData> = {
+  "/blog/wordpress-malware-keeps-coming-back": {
+    title: "Why WordPress Malware Keeps Coming Back After Cleanup",
+    description:
+      "If your site was cleaned and got reinfected, the malware wasn't the real problem — the entry point was never closed. What actually causes reinfection, from a real 263-site recovery.",
+    path: "/blog/wordpress-malware-keeps-coming-back",
+    type: "article",
+    breadcrumbs: [
+      { name: "Home", path: "/" },
+      { name: "Blog", path: "/blog" },
+      { name: "Why WordPress Malware Keeps Coming Back", path: "/blog/wordpress-malware-keeps-coming-back" },
+    ],
+    schema: [
+      articleSchema({
+        title: "Why WordPress Malware Keeps Coming Back After Cleanup",
+        description:
+          "Why reinfection happens after a WordPress cleanup — unclosed entry points, self-healing droppers, and database-level persistence — with a real case example.",
+        path: "/blog/wordpress-malware-keeps-coming-back",
+        published: "2026-08-23",
+      }),
+      faqSchema([
+        {
+          question: "My host says they already cleaned my site — why did it get hacked again?",
+          answer:
+            "Hosting-level cleanups typically remove obvious malicious files from the filesystem only. They rarely audit the database for hidden triggers or admin accounts, and they don't usually identify or close the original vulnerability, so the same entry point remains open.",
+        },
+        {
+          question: "How long should I monitor a site after cleanup before trusting it's clean?",
+          answer:
+            "At least 30 days. Some persistence mechanisms, like comment-activated database triggers, sit dormant until a specific condition is met, so a few clean days is not proof of a complete recovery.",
+        },
+        {
+          question: "Can a plugin-based scanner catch a database trigger?",
+          answer:
+            "No. WordPress security plugins scan files and, at best, known malicious database content patterns. They do not check for triggers, stored procedures, or scheduled events, since WordPress itself never creates these on its own.",
+        },
+      ]),
+    ],
+  },
+  "/blog/hidden-wordpress-backdoors-database-triggers": {
+    title: "How to Identify and Remove Hidden WordPress Backdoors",
+    description:
+      "Most WordPress backdoors are files. The ones that survive a cleanup are the ones nobody checks for — including a MySQL trigger that creates an admin account when someone posts a comment.",
+    path: "/blog/hidden-wordpress-backdoors-database-triggers",
+    type: "article",
+    breadcrumbs: [
+      { name: "Home", path: "/" },
+      { name: "Blog", path: "/blog" },
+      { name: "Hidden WordPress Backdoors", path: "/blog/hidden-wordpress-backdoors-database-triggers" },
+    ],
+    schema: [
+      articleSchema({
+        title: "How to Identify and Remove Hidden WordPress Backdoors",
+        description:
+          "File-based and database-level WordPress backdoors explained, including a real database-trigger backdoor that let an anonymous comment create a full admin account.",
+        path: "/blog/hidden-wordpress-backdoors-database-triggers",
+        published: "2026-08-23",
+      }),
+      faqSchema([
+        {
+          question: "Can Wordfence, Sucuri, or MalCare detect database triggers?",
+          answer:
+            "No. These tools are built to scan files and known malicious code patterns, not database schema objects like triggers, stored procedures, or scheduled events. A clean scan result from these tools does not rule out database-level persistence.",
+        },
+        {
+          question: "How would an attacker even plant a database trigger?",
+          answer:
+            "The same way they gain any other access — a compromised admin account, a vulnerable plugin with SQL execution capability, or direct database credentials obtained from a leaked config file. Once they have any way to run SQL, planting a trigger is straightforward.",
+        },
+        {
+          question: "Is it safe to just drop every trigger I find?",
+          answer:
+            "Only after confirming it isn't something your own team or a legitimate plugin created, since some plugins use triggers for caching or logging. Investigate what a trigger does before removing it, but any trigger you can't account for should be treated as hostile.",
+        },
+      ]),
+    ],
+  },
   "/blog/wordpress-malware-removal": {
     title: "How to Remove Malware from WordPress (Without Missing the Backdoor)",
     description:
