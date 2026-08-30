@@ -1,4 +1,4 @@
-import { Ambulance, CheckCircle2, Clock, ArrowRight, Phone, AlertTriangle, Shield, RefreshCw } from "lucide-react";
+import { Ambulance, CheckCircle2, Clock, ArrowRight, Phone, AlertTriangle, Shield, RefreshCw, XCircle, Download } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/Layout";
@@ -58,6 +58,16 @@ export default function HackedSiteRecovery() {
                 <div key={b.label} className="flex items-center gap-2 text-muted-foreground">{b.icon}{b.label}</div>
               ))}
             </div>
+            <Link
+              href="/case-studies/agency-portfolio-recovery"
+              className="mt-8 flex items-center gap-3 bg-white/80 border border-primary/20 rounded-2xl px-5 py-4 max-w-xl hover:border-primary/40 hover:shadow-sm transition-all group"
+            >
+              <span className="text-3xl font-bold text-primary shrink-0">263</span>
+              <span className="text-sm text-muted-foreground">
+                sites recovered in our largest single engagement — three servers, two hidden database-trigger backdoors.{" "}
+                <span className="text-primary font-medium group-hover:underline">Read the case study →</span>
+              </span>
+            </Link>
           </div>
         </div>
       </section>
@@ -99,6 +109,57 @@ export default function HackedSiteRecovery() {
                 <Link href="/contact">Submit Emergency Request <ArrowRight size={18} className="ml-2" /></Link>
               </Button>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* DIFFERENTIATOR */}
+      <section className="py-20 bg-gray-950 text-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Not Another Vague Scanner Report</h2>
+            <p className="text-white/70">
+              A lot of "recovery" is a plugin scan, a list of theoretical issues, and an upsell. That's not what closes a real breach.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-7">
+              <h3 className="font-bold text-white/60 text-sm uppercase tracking-wider mb-5">What most "cleanups" do</h3>
+              <ul className="space-y-4">
+                {[
+                  "Run an automated scan and hand you a generic PDF of flagged files",
+                  "Delete the obvious malware but miss the backdoor that put it there",
+                  "Never check database triggers or scheduled cron jobs — so reinfection is just a matter of days",
+                  "Call it done without a verification pass on a second scan method",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm text-white/70">
+                    <XCircle size={16} className="text-white/40 shrink-0 mt-0.5" /> {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-2xl border border-accent/30 bg-accent/10 p-7">
+              <h3 className="font-bold text-accent text-sm uppercase tracking-wider mb-5">What we actually do</h3>
+              <ul className="space-y-4">
+                {[
+                  "Manually trace the real entry point — file diffs, timestamps, and injected code, not just a signature scan",
+                  "Find and close the backdoor itself, including ones hidden in database triggers and scheduled tasks",
+                  "Verify clean with a second, independent scan method before we call it done",
+                  "Harden the specific weakness that caused the breach, not a generic checklist",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm text-white font-medium">
+                    <CheckCircle2 size={16} className="text-accent shrink-0 mt-0.5" /> {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button asChild variant="outline" size="lg" className="border-white/20 text-white bg-transparent hover:bg-white hover:text-foreground">
+              <Link href="/resources/wordpress-hack-recovery-checklist">
+                <Download size={18} className="mr-2" /> Get the Free Recovery Checklist
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

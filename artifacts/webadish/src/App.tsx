@@ -40,6 +40,7 @@ const IndiaWorkspaceLp = lazy(() => import("@/pages/IndiaWorkspaceLp"));
 const IndiaWorkspacePage = lazy(() => import("@/pages/IndiaWorkspacePage"));
 const IndiaEmailMigration = lazy(() => import("@/pages/IndiaEmailMigration"));
 const SecurityScore = lazy(() => import("@/pages/SecurityScore"));
+const WordPressRecoveryChecklist = lazy(() => import("@/pages/WordPressRecoveryChecklist"));
 const AgencyPartners = lazy(() => import("@/pages/AgencyPartners"));
 const Blog = lazy(() => import("@/pages/Blog"));
 const BlogPost = lazy(() => import("@/pages/BlogPost"));
@@ -76,6 +77,7 @@ function AppRoutes() {
         <Route path="/google-workspace" component={IndiaWorkspacePage} />
         <Route path="/email-migration-india" component={IndiaEmailMigration} />
         <Route path="/security-score" component={SecurityScore} />
+        <Route path="/resources/wordpress-hack-recovery-checklist" component={WordPressRecoveryChecklist} />
         <Route path="/agency-partners" component={AgencyPartners} />
         <Route path="/blog" component={Blog} />
         <Route path="/10-website-hacking-methods-that-put-your-site-at-risk-in-2025" component={BlogPost} />

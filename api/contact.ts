@@ -32,6 +32,8 @@ const DISPOSABLE_DOMAINS = new Set([
 
 const RISKY_LINK_TLDS = ['.ru', '.cn', '.tk', '.pw', '.top', '.xyz', '.click', '.download'];
 
+const LEAD_MAGNET_SERVICE = 'Free Recovery Checklist';
+
 async function sendLeadWebhook(payload: Record<string, unknown>, requestId: string) {
   const webhookUrl = process.env.CONTACT_WEBHOOK_URL;
   if (!webhookUrl) return { sent: false as const, skipped: true as const };
@@ -124,9 +126,10 @@ export default async function handler(req: any, res: any) {
     const phoneStr = typeof phone === 'string' ? phone.trim() : '';
     const messageStr = typeof message === 'string' ? message.trim() : '';
     const serviceStr = typeof service === 'string' ? service.trim() : '';
+    const isLeadMagnet = serviceStr === LEAD_MAGNET_SERVICE;
 
     // --- REQUIRED FIELDS ---
-    if (!nameStr || !emailStr || !messageStr) {
+    if (!nameStr || !emailStr || (!messageStr && !isLeadMagnet)) {
       log('validation_failed_missing_fields');
       if (acceptsHtml) {
         return respondRedirect(res, returnTo, 'error', requestId, 'Please fill name, email, and message.');
@@ -271,17 +274,19 @@ export default async function handler(req: any, res: any) {
     );
     log('lead_webhook_result', webhookResult);
 
-    const confirmationMail: OutboundMail = {
-      to: emailStr,
-      subject: 'We received your message - WebAdish',
-      html: `
-        <h2>Thank you for contacting WebAdish!</h2>
-        <p>Hi ${escapeHtml(nameStr)},</p>
-        <p>We've received your message and our team will get back to you within 4 business hours.</p>
-        <p>For urgent issues (site hacked), please call us directly at <strong>+91 999 875 7045</strong>.</p>
-        <p>Best regards,<br>WebAdish Team</p>
-      `,
-    };
+    const confirmationMail: OutboundMail = isLeadMagnet
+      ? buildChecklistMail(emailStr, nameStr)
+      : {
+          to: emailStr,
+          subject: 'We received your message - WebAdish',
+          html: `
+            <h2>Thank you for contacting WebAdish!</h2>
+            <p>Hi ${escapeHtml(nameStr)},</p>
+            <p>We've received your message and our team will get back to you within 4 business hours.</p>
+            <p>For urgent issues (site hacked), please call us directly at <strong>+91 999 875 7045</strong>.</p>
+            <p>Best regards,<br>WebAdish Team</p>
+          `,
+        };
 
     if (!flags.length) {
       void sendMail(confirmationMail, requestId)
@@ -454,6 +459,52 @@ async function sendViaResend(mail: OutboundMail, requestId: string): Promise<{ i
   return { id: typeof data?.id === 'string' ? data.id : 'unknown' };
 }
 
+
+function buildChecklistMail(to: string, name: string): OutboundMail {
+  const section = (title: string, items: string[]) => `
+    <h3 style="margin:24px 0 8px;">${escapeHtml(title)}</h3>
+    <ul style="margin:0; padding-left:20px;">
+      ${items.map((item) => `<li style="margin-bottom:8px; line-height:1.5;">${escapeHtml(item)}</li>`).join('')}
+    </ul>
+  `;
+
+  return {
+    to,
+    subject: 'Your WordPress Hack Recovery Checklist - WebAdish',
+    html: `
+      <h2>Hi ${escapeHtml(name)}, here's your recovery checklist</h2>
+      <p>This is the same triage sequence our team used to recover 263 WordPress sites across three servers in one engagement — including two database-trigger backdoors most cleanups miss entirely.</p>
+      ${section('1. Immediate Triage (first 30 minutes)', [
+        "Take a full backup of the site in its current (infected) state before changing anything.",
+        "Put the site in maintenance mode or restrict public access if it's actively serving malware or spam redirects.",
+        'Change all WordPress admin, hosting, FTP/SFTP, and database passwords — assume every credential is compromised.',
+        "Check wp-admin for unfamiliar administrator accounts and remove access immediately (document first, don't delete yet).",
+      ])}
+      ${section('2. Find the Real Entry Point', [
+        'Check file modification timestamps against your last known-clean state to isolate when the breach started.',
+        'Diff core WordPress files, active theme, and plugin files against clean copies from wordpress.org.',
+        'Search for suspicious PHP functions (base64_decode, eval, gzinflate, create_function) in uploads and theme directories.',
+        "Check wp_options and wp_usermeta for injected admin users, rogue capabilities, or cron jobs you didn't create.",
+        'Review database triggers — these survive a plugin/theme wipe and are a common reason sites reinfect within days of a "clean" scan.',
+      ])}
+      ${section('3. Clean and Verify', [
+        "Remove malicious code at the source, not just the symptom — a redirect script isn't the problem if the backdoor recreating it is still there.",
+        'Reinstall WordPress core, theme, and all plugins from official sources rather than hand-editing infected files.',
+        "Re-scan after cleanup using a different method than the one that found the infection.",
+        'Request Google Safe Browsing, Search Console, and blacklist (McAfee, Sucuri, Norton) review once confirmed clean.',
+      ])}
+      ${section("4. Harden So It Doesn't Come Back", [
+        'Enforce 2FA for every admin and editor account, no exceptions.',
+        'Set a firewall rule blocking direct PHP execution from /uploads/.',
+        'Rotate all API keys, salts (in wp-config.php), and third-party service tokens.',
+        'Put the site on a monitored update and audit cadence — a one-time cleanup without ongoing oversight is why most sites reinfect within 90 days.',
+      ])}
+      <p style="margin-top:24px;">Want the full story behind this checklist? <a href="https://www.webadish.com/case-studies/agency-portfolio-recovery">Read the 263-site recovery case study</a>.</p>
+      <p>If your site is compromised right now, don't wait — <a href="https://www.webadish.com/hacked-site-recovery">get emergency help</a> or call <strong>+91 999 875 7045</strong>.</p>
+      <p>Best regards,<br>WebAdish Team</p>
+    `,
+  };
+}
 
 function escapeHtml(text: string): string {
   const map: Record<string, string> = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };

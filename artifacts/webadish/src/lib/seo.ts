@@ -19,6 +19,7 @@ export const PRERENDER_ROUTES = [
   "/maintenance-retainer-lp",
   "/india/cert-in-incident-readiness",
   "/security-score",
+  "/resources/wordpress-hack-recovery-checklist",
   "/agency-partners",
   "/about",
   "/blog",
@@ -586,6 +587,27 @@ const pageSeo: Record<string, SeoData> = {
         "A practical WordPress security score and self-assessment page for business websites that need a clearer view of operational risk.",
         "/security-score",
         "WordPress security assessment",
+      ),
+    ],
+  },
+  "/resources/wordpress-hack-recovery-checklist": {
+    title: "Free WordPress Hack Recovery Checklist",
+    description:
+      "A free, practical WordPress hack recovery checklist covering triage, finding the real entry point, cleanup verification, and hardening — drawn from a real 263-site recovery engagement.",
+    path: "/resources/wordpress-hack-recovery-checklist",
+    keywords: [
+      "wordpress hack recovery checklist",
+      "wordpress malware removal checklist",
+      "how to recover hacked wordpress site",
+      "wordpress backdoor removal steps",
+    ],
+    breadcrumbs: breadcrumbs("Recovery Checklist", "/resources/wordpress-hack-recovery-checklist"),
+    schema: [
+      serviceSchema(
+        "WordPress Hack Recovery Checklist",
+        "A free triage-to-hardening checklist for recovering a hacked WordPress site, based on a real multi-site recovery engagement.",
+        "/resources/wordpress-hack-recovery-checklist",
+        "WordPress hack recovery guide",
       ),
     ],
   },

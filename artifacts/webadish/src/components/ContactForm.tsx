@@ -27,6 +27,7 @@ type ContactFormProps = {
   services?: string[];
   messageLabel?: string;
   messagePlaceholder?: string;
+  requireMessage?: boolean;
 };
 
 type ContactFeedback = {
@@ -72,6 +73,7 @@ export default function ContactForm({
   services = DEFAULT_SERVICES,
   messageLabel = "Message *",
   messagePlaceholder = "Website URL, what the site does, what concerns you most, and whether this is urgent...",
+  requireMessage = true,
 }: ContactFormProps) {
   const turnstileEnabled = import.meta.env.VITE_TURNSTILE_ENABLED === "true";
   const turnstileSiteKey = turnstileEnabled ? (import.meta.env.VITE_TURNSTILE_SITE_KEY || "") : "";
@@ -364,7 +366,7 @@ export default function ContactForm({
               <label htmlFor={`${formName}-message`} className="block text-sm font-medium mb-2">{messageLabel}</label>
               <textarea
                 id={`${formName}-message`}
-                required
+                required={requireMessage}
                 rows={5}
                 name="message"
                 placeholder={messagePlaceholder}

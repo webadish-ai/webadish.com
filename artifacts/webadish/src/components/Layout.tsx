@@ -235,6 +235,7 @@ export function Footer() {
               <li><Link href="/blog" className="text-muted-foreground hover:text-accent text-sm transition-colors">Blog</Link></li>
               <li><Link href="/pricing" className="text-muted-foreground hover:text-accent text-sm transition-colors">Pricing</Link></li>
               <li><Link href="/security-score" className="text-muted-foreground hover:text-accent text-sm transition-colors">Free Security Score</Link></li>
+              <li><Link href="/resources/wordpress-hack-recovery-checklist" className="text-muted-foreground hover:text-accent text-sm transition-colors">Free Recovery Checklist</Link></li>
               <li><Link href="/india" className="text-muted-foreground hover:text-accent text-sm transition-colors">India Services</Link></li>
               <li><Link href="/google-workspace" className="text-muted-foreground hover:text-accent text-sm transition-colors">Google Workspace India</Link></li>
               <li><Link href="/email-migration-india" className="text-muted-foreground hover:text-accent text-sm transition-colors">Email Migration</Link></li>
