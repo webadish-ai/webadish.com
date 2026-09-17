@@ -205,15 +205,20 @@ export default function ContactForm({
 
       const successRequestId = responseRequestId || (typeof data?.request_id === "string" ? data.request_id : "");
       if (successRequestId) setRequestId(successRequestId);
-      
-      trackEvent("conversion", { form_name: formName });
-      trackEvent("form_submit_success", {
-        form_name: formName,
-        service: form.service || "unspecified",
-        page_path: pagePath,
-      });
-      if (typeof window.gtag === "function") {
-        window.gtag("event", "conversion", { send_to: "AW-17995549251/F5vvCMaO4LEcEMOU-YRD" });
+
+      // Blocked/spam submissions get a normal-looking success response (so bots don't
+      // learn they were caught), but must not count as a real ad conversion.
+      const isBlockedSpam = data?.blocked === true;
+      if (!isBlockedSpam) {
+        trackEvent("conversion", { form_name: formName });
+        trackEvent("form_submit_success", {
+          form_name: formName,
+          service: form.service || "unspecified",
+          page_path: pagePath,
+        });
+        if (typeof window.gtag === "function") {
+          window.gtag("event", "conversion", { send_to: "AW-17995549251/F5vvCMaO4LEcEMOU-YRD" });
+        }
       }
       setSubmitted(true);
       resetForm();
